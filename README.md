@@ -1,47 +1,50 @@
-# Smart Budget Tracker
+Smart Budget Tracker
+Om projektet
+Smart Budget Tracker är en webbapplikation där användaren kan hålla koll på sina inkomster och utgifter. Appen samlar alla transaktioner på ett ställe och räknar automatiskt ut totalerna och saldot.
 
-## Om projektet
-Smart Budget Tracker är en webbapplikation där användaren kan hålla koll på sina inkomster och utgifter. Man kan lägga till, redigera och ta bort transaktioner samt se sitt totala saldo.
+Projektet är avgränsat till grundfunktionerna: registrera, visa, redigera och radera transaktioner samt enkla summeringar.
 
-## Funktioner
-- Lägga till inkomster och utgifter.
-- Visa alla transaktioner.
-- Redigera och ta bort transaktioner.
-- Se totala inkomster och utgifter.
-- Se aktuellt saldo.
-- Se antal transaktioner.
-- Välja kategori och datum.
+Funktioner
+Lägga till inkomster och utgifter (beskrivning, belopp, kategori, typ och datum).
+Visa alla transaktioner, sorterade med det senaste datumet först.
+Redigera och ta bort transaktioner (med bekräftelse innan borttagning).
+Se totala inkomster, totala utgifter, saldo och antal transaktioner.
+Validering av formuläret.
+Tekniker
+C#, .NET 9, ASP.NET Core MVC, Entity Framework Core 9, SQL Server LocalDB, Razor, HTML, CSS och Bootstrap.
 
-## Tekniker
-- C#
-- .NET 9
-- ASP.NET Core MVC
-- Entity Framework Core
-- SQL Server LocalDB
-- HTML, CSS och Bootstrap
+Förkunskaper
+Visual Studio 2022 med arbetsbelastningen ASP.NET och webbutveckling (innehåller SQL Server LocalDB)
+.NET 9 SDK
+Starta projektet
+Öppna SmartBudgetTracker.sln i Visual Studio.
 
-## Databas
-Applikationen använder SQL Server LocalDB för att spara transaktionerna. Informationen finns kvar även efter att programmet har stängts.
+Öppna Package Manager Console (Verktyg > NuGet-pakethanterare > Package Manager Console) och kör:
 
-## AI som verktyg
-Under utvecklingen har jag använt både ChatGPT och Claude som hjälpmedel.
-
-AI-verktygen har använts för att:
-- Få förklaringar av kod och programmering.
-- Få hjälp med felsökning.
-- Förstå hur olika delar av ASP.NET Core MVC fungerar.
-- Få förslag på lösningar och förbättringar.
-- Få hjälp med planering och strukturering av projektet.
-
-AI har främst fungerat som ett stöd under arbetet. Jag har gått igenom kodförslag och använt dem för att lära mig mer om hur applikationen fungerar.
-
-## Starta projektet
-1. Öppna projektet i Visual Studio.
-2. Kontrollera att projektet är valt som startprojekt.
-3. Öppna Package Manager Console och kör:
-
-```powershell
 Update-Database
-```
+Kommandot skapar databasen och tabellen på din dator. Databasen är tom från början, eftersom den är lokal och inte följer med projektet. Detta måste göras innan första start.
 
-4. Starta programmet med F5.
+Starta programmet med F5.
+
+Använda appen
+Startsidan visar summeringskort och en tabell med alla transaktioner.
+Klicka på Lägg till ny transaktion och fyll i formuläret.
+Skriv belopp med komma, till exempel 49,50. Appen använder svenska talformat, så punkt godkänns inte.
+Använd Redigera och Radera i tabellen för att ändra eller ta bort en transaktion.
+Testning
+Applikationen har testats manuellt:
+
+Skapa, redigera och radera transaktioner
+Data finns kvar efter omstart av appen
+Summorna för inkomster, utgifter, saldo och antal stämmer
+Sortering efter datum
+Validering: tomma obligatoriska fält, belopp 0 eller negativt belopp och tomt datum nekas med felmeddelande
+Begränsningar
+Ingen inloggning, alla transaktioner delas i samma databas.
+Databasen skapas inte automatiskt (Update-Database måste köras först).
+Vissa felmeddelanden från ramverket (till exempel för ogiltigt belopp) visas på engelska.
+Inga automatiska tester.
+AI som verktyg
+Under utvecklingen har jag använt ChatGPT och Claude som hjälpmedel för att få förklaringar av kod, hjälp med felsökning, förslag på lösningar och hjälp med planering. Jag har gått igenom kodförslagen och använt dem för att lära mig hur applikationen fungerar.
+
+I slutet av projektet lät jag Claude granska koden och köra appen.
