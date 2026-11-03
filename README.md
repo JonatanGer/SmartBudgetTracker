@@ -45,6 +45,3 @@ Update-Database
 ```
 
 4. Starta programmet med F5.
-
-## Utvecklare
-Utvecklat som ett skolprojekt inom utbildningen Programutvecklare .NET.
