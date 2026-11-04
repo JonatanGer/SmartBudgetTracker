@@ -1,0 +1,111 @@
+﻿@model List<SmartBudgetTracker.Models.Transaction>
+
+@{
+    ViewData["Title"] = "Mina transaktioner";
+}
+
+<h2>Mina transaktioner</h2>
+
+
+<!-- Visar en sammanfattning av ekonomin -->
+<div class="row mt-4 mb-4">
+
+    <!-- Totala inkomster -->
+    <div class="col-md-3">
+        <div class="card border-success">
+            <div class="card-body">
+                <h5 class="card-title">Inkomster</h5>
+                <h3 class="text-success">
+                    @ViewBag.Income.ToString("N2", new System.Globalization.CultureInfo("sv-SE")) kr
+                </h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Totala utgifter -->
+    <div class="col-md-3">
+        <div class="card border-danger">
+            <div class="card-body">
+                <h5 class="card-title">Utgifter</h5>
+                <h3 class="text-danger">
+                    @ViewBag.Expenses.ToString("N2", new System.Globalization.CultureInfo("sv-SE")) kr
+                </h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pengar som finns kvar -->
+    <div class="col-md-3">
+        <div class="card border-primary">
+            <div class="card-body">
+                <h5 class="card-title">Saldo</h5>
+                <h3 class="text-primary">
+                    @ViewBag.Balance.ToString("N2", new System.Globalization.CultureInfo("sv-SE")) kr
+                </h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Antal transaktioner -->
+    <div class="col-md-3">
+        <div class="card p-3">
+            <h6>Antal transaktioner</h6>
+            <h4 class="text-primary">@ViewBag.TransactionCount</h4>
+        </div>
+    </div>
+
+
+</div>
+
+
+<!-- Knapp för att lägga till en ny transaktion -->
+<a asp-controller="Transactions" asp-action="Create"
+   class="btn btn-primary mb-3">
+    Lägg till ny transaktion +
+</a>
+
+
+<p>Här kan du se dina inkomster och utgifter.</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Beskrivning</th>
+            <th>Belopp</th>
+            <th>Kategori</th>
+            <th>Typ</th>
+            <th>Datum</th>
+            <th>Åtgärder</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var transaction in Model)
+        {
+            <tr>
+                <td>@transaction.Description</td>
+                <td>@transaction.Amount.ToString("N2", new System.Globalization.CultureInfo("sv-SE")) kr</td>
+                <td>@transaction.Category</td>
+                <td>@(transaction.Type == "Income" ? "Inkomst" : "Utgift")</td>
+                <td>@transaction.Date.ToShortDateString()</td>
+
+
+                <td>
+                    <!-- Redigerar transaktionen -->
+                    <a asp-action="Edit" asp-route-id="@transaction.Id"
+                       class="btn btn-warning btn-sm">
+                        Redigera
+                    </a>
+
+                    <!-- Raderar transaktionen -->
+                    <a asp-action="Delete" asp-route-id="@transaction.Id"
+                       class="btn btn-danger btn-sm">
+                        Radera
+                    </a>
+                </td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>
